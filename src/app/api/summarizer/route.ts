@@ -1,15 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 
-const apiKey = process.env.GROK_API_KEY;
+const apiKey = process.env.GEMINI_API_KEY;
 
 if (!apiKey) {
-  throw new Error("GROK_API_KEY is not defined in the environment variables");
+  throw new Error("GEMINI_API_KEY is not defined in the environment variables");
 }
 
 const openai = new OpenAI({
   apiKey: apiKey,
-  baseURL: "https://api.x.ai/v1",
+  baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
 });
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     ];
 
     const response = await openai.chat.completions.create({
-      model: "grok-beta",
+      model: "gemini-2.0-flash",
       messages,
       temperature: 0.6,
     });

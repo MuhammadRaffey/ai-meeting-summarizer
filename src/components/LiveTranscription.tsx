@@ -115,6 +115,8 @@ function LiveTranscription() {
 
       const data = await response.json();
       setSummarizedText(data.summary || "No summary available.");
+      // Automatically switch to the summary tab after successful summarization
+      setActiveTab("summary");
     } catch (error) {
       console.error("Error summarizing transcription:", error);
       setSummarizedText("Failed to summarize transcription.");
